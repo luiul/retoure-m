@@ -1,0 +1,33 @@
+{
+  "name": "retoure-mig",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "make-model": "npx sequelize-cli model:generate --name Transport --attributes transport_status:string,paket_id:integer,paket_bez:string,fach_bez:string,zbs_bez:string,tour_bez:string,tour:array,tour_zeit:array,emp_name:string,emp_plz:string,abd_name:string,abd_plz:string,abholversuch:integer,alter:integer",
+    "migrate": "npx sequelize-cli db:migrate",
+    "down": "npx sequelize-cli db:migrate:undo",
+    "make-seed":"npx sequelize-cli seed:generate --name demo-transport",
+    "seed":"npx sequelize-cli db:seed:all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luiul/retoure-mig.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luiul/retoure-mig/issues"
+  },
+  "homepage": "https://github.com/luiul/retoure-mig#readme",
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
+  },
+  "dependencies": {
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.6.5"
+  }
+}

@@ -1,0 +1,36 @@
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Transport extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  };
+  Transport.init({
+    transport_status: DataTypes.INTEGER,
+    paket_id: DataTypes.INTEGER,
+    paket_bez: DataTypes.STRING,
+    fach_bez: DataTypes.STRING,
+    zbs_bez: DataTypes.STRING,
+    tour_bez: DataTypes.STRING,
+    tour: DataTypes.ARRAY(Sequelize.STRING),
+    tour_zeit: DataTypes.ARRAY(Sequelize.STRING),
+    emp_name: DataTypes.STRING,
+    emp_plz: DataTypes.STRING,
+    abd_name: DataTypes.STRING,
+    abd_plz: DataTypes.STRING,
+    abholversuch: DataTypes.INTEGER,
+    alter: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'Transport',
+  });
+  return Transport;
+};
