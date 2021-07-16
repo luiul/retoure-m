@@ -1,6 +1,6 @@
-🚚 Retouren App with Sequelize Migration
+# 🚚 Retouren App with Sequelize Migration
 
-Run the following commands to set up the database:
+Extension of the 🚚 Retouren App with Sequelize Migration to better duplicate results. Run the following commands in the shell to set up the database:
 
 ```zsh
 npm init -y;
@@ -10,16 +10,14 @@ npm install --save-dev sequelize-cli;
 npx sequelize-cli init;
 ```
 
-Set up the `config.json` file in the `config` folder.
-
-Make model, migrate to PostgreSQL:
+Set up the `config.json` file in the `config` folder. Make model, migrate to PostgreSQL by running the following commands in the shell:
 
 ```zsh
 npm run make-model;
 npm run migrage;
 ```
 
-Make trigger function to populate `tour` and `tour_zeit`:
+Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following command in the Query Tool:
 
 ```sql
 create function add_tour()
@@ -36,7 +34,7 @@ $$
 language plpgsql
 ```
 
-Make trigger:
+Make PostgreSQL trigger by running the following command in the Query Tool:
 
 ```sql
 create trigger add_tour
@@ -45,7 +43,7 @@ for each row
 execute procedure add_tour()
 ```
 
-Run seed and populate the database:
+Run seed and populate the database by running the following command in the shell:
 
 ```zsh
 npm run seed

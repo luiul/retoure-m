@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       transport_status: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue:'0'
       },
       paket_id: {
         type: Sequelize.INTEGER,

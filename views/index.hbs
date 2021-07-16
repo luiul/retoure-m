@@ -1,0 +1,16 @@
+<section id="search" class="search-wrap">
+  <h1>
+    🎫 Paket-ID eingeben
+  </h1>
+  <form action="/transport/search" class="search-form" method="GET">
+    <input type="search" name="term" placeholder="Paket-ID eingeben ..." />
+    <input type="submit" value="Suche" />
+  </form>
+      {{#each errors}}
+      <div class="error">
+        <p>
+          {{text}}
+        </p>
+      </div>
+    {{/each}}
+</section>

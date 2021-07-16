@@ -1,0 +1,85 @@
+<section id="add" class="container">
+  <div class="form-wrap">
+    <h1>Auftrag hinzufügen</h1>
+
+    <p>Hier können Sie einen Transportauftrag hinzufügen.</p>
+    <p>Der Paket-Status wird mit dem Wert 0 (nicht
+      geliefert) initialisiert.</p>
+    <p>Die Anzahl von Abholversuche wird mit 0 initialisiert.</p>
+    <p>Das Alter vom Paket wird mit 0
+      initialisiert.</p>
+
+    {{#each errors}}
+    <div class="error">
+      <p>{{text}}</p>
+    </div>
+    {{/each}}
+
+    <form action="/transport/add" method="POST">
+
+      <div class="input-group">
+        <label for="paket_id">Packet-ID</label>
+        <input type="number" min="0" step="1" name="paket_id" id="paket_id" class="input-box" placeholder="z.B. 1" maxlength="100"
+          value={{paket_id}}>
+      </div>
+
+
+      <div class="input-group">
+        <label for="paket_bez">Packet-Bezeichnung</label>
+        <input type="text" name="paket_bez" id="paket_bez" class="input-box" placeholder="z.B. Laptop" maxlength="100"
+          value={{paket_bez}}>
+      </div>
+
+      <div class="input-group">
+        <label for="fach_bez">Fach-Bezeichnung</label>
+        <input type="text" name="fach_bez" id="fach_bez" class="input-box" placeholder="z.B. Fach 1" maxlength="100"
+          value={{fach_bez}}>
+      </div>
+
+      <div class="input-group">
+        <label for="zbs_bez">ZBS-Bezeichnung</label>
+        <input type="text" name="zbs_bez" id="zbs_bez" class="input-box" placeholder="z.B. ZBS 1" maxlength="100"
+          value={{zbs_bez}}>
+      </div>
+
+
+      <div class="input-group">
+        <label for="tour_bez">Tour-Bezeichnung</label>
+        <input type="text" name="tour_bez" id="tour_bez" class="input-box" placeholder="z.B. NRW 1" maxlength="100"
+          value={{tour_bez}}>
+      </div>
+
+
+      <div class="input-group">
+        <label for="tour">Tour</label>
+        <input type="text" name="tour" id="tour" class="input-box" placeholder="z.B. 00000, 00001, 00000" maxlength="100" value={{tour}}>
+      </div>
+
+      <div class="input-group">
+        <label for="emp_name">Empfänger</label>
+        <input type="text" name="emp_name" id="emp_name" class="input-box" placeholder="z.B. Alice" maxlength="100"
+          value={{emp_name}}>
+      </div>
+
+      <div class="input-group">
+        <label for="emp_plz">Empfänger-PLZ</label>
+        <input type="text" name="emp_plz" id="emp_plz" class="input-box" placeholder="z.B. 00001" maxlength="100"
+          value={{emp_plz}}>
+      </div>
+
+      <div class="input-group">
+        <label for="abd_name">Absender</label>
+        <input type="text" name="abd_name" id="abd_name" class="input-box" placeholder="z.B. Bob" maxlength="100"
+          value={{abd_name}}>
+      </div>
+
+      <div class="input-group">
+        <label for="abd_plz">Absender-PLZ</label>
+        <input type="text" name="abd_plz" id="abd_plz" class="input-box" placeholder="z.B. 00001" maxlength="100"
+          value={{abd_plz}}>
+      </div>
+
+      <input type="submit" value="Auftrag hinzufügen" class="btn btn-reverse">
+    </form>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+<section id="transport" class="container">
+    <h1>Alle Aufträge</h1>
+    {{#each transport}}
+    <div class="transport">
+        <ul>
+            <li>Paket-Status: {{transport_status}}&ensp;<span>0 : nicht geliefert, 1 : geliefert</span></li>
+            <li>Paket-ID: {{paket_id}} &ensp; |&ensp; Paket: {{paket_bez}}</li>
+            <li>{{fach_bez}} &ensp; |&ensp; {{zbs_bez}}&ensp; | &ensp;Tour: {{tour_bez}}</li>
+            <li>Tour-Ziele: {{tour}}</li>
+            <li>Empfänger: {{emp_name}}&ensp; |&ensp; PLZ: {{emp_plz}}</li>
+            <li>Absender: {{abd_name}}&ensp; |&ensp; PLZ: {{abd_plz}}</li>
+            <li>Abholversuche: {{abholversuch}} &ensp;<span>max. 3 Abholversuche</span></li>
+            <li>Paket-Alter: {{alter}} &ensp;<span>max. Alter 14 Tage</span></li>
+        </ul>
+    </div>
+    {{else}}
+    <p>No data available</p>
+    {{/each}}
+</section>
+
+{{!--
+transport_status, paket_id, paket_bez, fach_id, fach_bez, zbs_id, zbs_bez, tour_id, tour_bez, tour, emp_id, emp_name,
+emp_plz, abd_id, abd_name, abd_plz, abholversuch
+--}}
