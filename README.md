@@ -17,7 +17,7 @@ npm run make-model;
 npm run migrage;
 ```
 
-Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following command in the Query Tool:
+Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following `create function` statement in the Query Tool:
 
 ```sql
 create function add_tour()
@@ -34,7 +34,7 @@ $$
 language plpgsql
 ```
 
-Make PostgreSQL trigger by running the following command in the Query Tool:
+Make PostgreSQL trigger by running the following `create trigger` statement in the Query Tool:
 
 ```sql
 create trigger add_tour
