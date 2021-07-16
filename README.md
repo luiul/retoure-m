@@ -1,6 +1,6 @@
 # 🚚 Retouren App with Sequelize Migration
 
-Extension of the 🚚 Retouren App with Sequelize Migration to better duplicate results. Run the following commands in the shell to set up the database:
+Updated [🚚 Retouren App](https://github.com/luiul/retoure) with Sequelize Migration to better duplicate results. Run the following commands in the shell to set up the database:
 
 ```zsh
 npm init -y;
