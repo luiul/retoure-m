@@ -1,17 +1,18 @@
 const express = require('express')
 const router = express.Router()
-// const db = require('../config/database')
-// const models.Transport = require('../models/index')
 const Sequelize = require('sequelize')
-const Op = Sequelize.Op
 const models = require( '../models/index');
 
-// Testing transport page
+// Might not be required in the final version
+const db = require('../config/database')
+const Op = Sequelize.Op
+
+// Testing transport page for the first time
 // router.get('/',(req,res)=>{
 //     res.send('TRANSPORT')
 // })
 
-// Get transport list
+// Get all transports
 router.get('/', (req, res) => {
     models.Transport.findAll()
         .then(transport => {
@@ -23,7 +24,7 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))
 })
 
-// Display add gig form
+// Display add transport form
 router.get('/add', (req, res) => res.render('add'))
 
 // Add transport (hardcoded to start with)
@@ -44,7 +45,7 @@ router.post('/add', (req, res) => {
     //     alter:0
     // }
 
-    let { paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, tour, emp_name, emp_plz, abd_name, abd_plz } = req.body
+    let { paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, emp_name, emp_plz, abd_name, abd_plz } = req.body
 
     // Server-side validation
     let errors = [];
@@ -87,14 +88,14 @@ router.post('/add', (req, res) => {
     if (errors.length > 0) {
         res.render('add', {
             errors,
-            paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, tour, emp_name, emp_plz, abd_name, abd_plz
+            paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, emp_name, emp_plz, abd_name, abd_plz
         })
     } else {
         // Prepare tour array for Sequelize
         tour = tour.split(',')
         // Insert into table
         models.Transport.create({
-            paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, tour, emp_name, emp_plz, abd_name, abd_plz
+            paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, emp_name, emp_plz, abd_name, abd_plz
         })
         .then(transport => res.redirect('/transport'))
         .catch(err => console.log(err))
