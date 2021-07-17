@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     paket_id: DataTypes.INTEGER,
     paket_bez: DataTypes.STRING,
     fach_bez: DataTypes.STRING,
+    fach_status: DataTypes.INTEGER,
     zbs_bez: DataTypes.STRING,
     tour_bez: DataTypes.STRING,
     tour: DataTypes.ARRAY(DataTypes.STRING),

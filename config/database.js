@@ -11,6 +11,7 @@ module.exports = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
     operatorsAliases: 0,
     logging: console.log,
 
+    // Initialize pool to avoid having to open and close single connections
     pool: {
         max: 5,
         min: 0,

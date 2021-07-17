@@ -10,7 +10,7 @@ module.exports = {
       },
       transport_status: {
         type: Sequelize.INTEGER,
-        defaultValue:'0'
+        defaultValue: '0'
       },
       paket_id: {
         type: Sequelize.INTEGER,
@@ -21,6 +21,10 @@ module.exports = {
       },
       fach_bez: {
         type: Sequelize.STRING
+      },
+      fach_status: {
+        type: Sequelize.INTEGER,
+        defaultValue:'0'
       },
       zbs_bez: {
         type: Sequelize.STRING

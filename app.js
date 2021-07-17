@@ -21,15 +21,14 @@ try {
     console.error('Unable to connect to the database:', error);
 }
 
-// Express-Handlebars middleware
+// Express-Handlebars router middleware (https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes)
 app.engine('.hbs', exphbs({ extname: '.hbs', defaultLayout: 'main', handlebars: allowInsecurePrototypeAccess(Handlebars) }));
 app.set('view engine', '.hbs');
+// Set static folder for css style
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Body parser
 app.use(express.urlencoded({ extended: false }));
-
-// Set static folder
-app.use(express.static(path.join(__dirname, 'public')))
 
 // INDEX ROUTE
 app.get('/', (req, res) => {

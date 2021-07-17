@@ -20,7 +20,7 @@ npm run migrage;
 Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following `create function` statement in the Query Tool:
 
 ```sql
-create function add_tour()
+create or replace function add_tour()
 returns trigger as
 $$
 begin
