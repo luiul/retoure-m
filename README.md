@@ -17,7 +17,7 @@ npm run make-model;
 npm run migrage;
 ```
 
-Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following `create function` statement in the Query Tool:
+Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following `create or replace function` statement in the Query Tool:
 
 ```sql
 create or replace function add_tour()
@@ -47,4 +47,27 @@ Run seed and populate the database by running the following command in the shell
 
 ```zsh
 npm run seed
+```
+
+After populating the database we can add the pickup trigger with the following `create or replace function` and `create trigger` statements in PostgreSQL:
+
+```sql
+create or replace function pickup()
+returns trigger as
+$$
+begin
+	if new.transport_status = 'abgeholt' then
+		new.fach_status:='frei';
+	end if;
+return new;
+end
+$$
+language plpgsql
+```
+
+```sql
+create trigger pickup
+before update on "Transports"
+for each row
+execute procedure pickup()
 ```

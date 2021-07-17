@@ -16,7 +16,9 @@ const Op = Sequelize.Op
 router.get('/', (req, res) => {
     models.Transport.findAll()
         .then(transport => {
-            // console.log(transport)
+            // console.log(Object.keys(transport))
+            console.log(transport)
+            // console.log(Object.entries(transport))
             res.render('transport', {
                 transport
             })

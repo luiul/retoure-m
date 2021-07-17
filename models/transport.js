@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Transport.init({
-    transport_status: DataTypes.INTEGER,
+    transport_status: DataTypes.STRING,
     paket_id: DataTypes.INTEGER,
     paket_bez: DataTypes.STRING,
     fach_bez: DataTypes.STRING,
-    fach_status: DataTypes.INTEGER,
+    fach_status: DataTypes.STRING,
     zbs_bez: DataTypes.STRING,
     tour_bez: DataTypes.STRING,
     tour: DataTypes.ARRAY(DataTypes.STRING),
