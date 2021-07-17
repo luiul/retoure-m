@@ -37,3 +37,6 @@ app.get('/', (req, res) => {
 
 // TRANSPORT ROUTE
 app.use('/transport', require('./routes/transport'))
+
+// RESERVE ROUTE
+app.use('/reserve', require('./routes/reserve'))

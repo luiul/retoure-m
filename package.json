@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "make-model": "npx sequelize-cli model:generate --name Transport --attributes transport_status:string,paket_id:integer,paket_bez:string,fach_bez:string,fach_status:string,zbs_bez:string,tour_bez:string,tour:array,tour_zeit:array,emp_name:string,emp_plz:string,abd_name:string,abd_plz:string,abholversuch:integer,alter:integer",
-    "migrate": "npx sequelize-cli db:migrate",
     "down": "npx sequelize-cli db:migrate:undo",
+    "migrate": "npx sequelize-cli db:migrate",
     "make-seed": "npx sequelize-cli seed:generate --name demo-transport",
     "seed": "npx sequelize-cli db:seed:all",
     "dev": "nodemon app.js"

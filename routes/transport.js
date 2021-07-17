@@ -96,7 +96,6 @@ router.post('/add', (req, res) => {
 
 router.get('/search', (req, res) => {
     let {term} = req.query
-
     // parte into integer
     term = parseInt(term)
 
@@ -105,9 +104,13 @@ router.get('/search', (req, res) => {
             paket_id:term
         }
     })
-    .then(transport => res.render('transport',{transport}))
+    .then(transport => {
+        // errors.push({ text: 'test!' })
+        res.render('transport_id',{
+            transport
+        })
+    })
     .catch(err => console.log(err))
 })
-
 
 module.exports = router

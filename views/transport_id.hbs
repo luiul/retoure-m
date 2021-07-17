@@ -1,0 +1,100 @@
+<section id="transport" class="container">
+    <h1>Suchergebnis</h1>
+    {{#each transport}}
+    <div class="transport">
+        <ul>
+            <table>
+                <tr>
+                    <th>Paketstatus</th>
+                    <td>{{transport_status}}</td>
+                </tr>
+                <tr>
+                    <th>Paket-ID</th>
+                    <td>{{paket_id}}</td>
+                </tr>
+                <tr>
+                    <th>Paket</th>
+                    <td>{{paket_bez}}</td>
+                </tr>
+                <tr>
+                    <th>Abholversuche</th>
+                    <td>{{abholversuch}}</td>
+                </tr>
+                <tr>
+                    <th>Tage nach Bestellung</th>
+                    <td>{{alter}}</td>
+                    {{!--
+                </tr>
+                <tr>
+                    <th>Fach</th>
+                    <td>{{fach_bez}}</td>
+                </tr>
+                <tr>
+                    <th>Fachstatus</th>
+                    <td>{{fach_status}}</td>
+                </tr>
+                <tr>
+                    <th>ZBS</th>
+                    <td>{{zbs_bez}}</td>
+                </tr>
+                <tr>
+                    <th>Tour</th>
+                    <td>{{tour_bez}}</td>
+                </tr> --}}
+            </table>
+
+            {{!-- <table>
+                <tr>
+                    <th>Tourstopps</th>
+                    <th>{{tour.[0]}}</th>
+                    <th>{{tour.[1]}}</th>
+                    <th>{{tour.[2]}}</th>
+                    <th>{{tour.[3]}}</th>
+                </tr>
+                <tr>
+                    <td>Zeitfenster</td>
+                    <td>{{tour_zeit.[0]}}</td>
+                    <td>{{tour_zeit.[1]}}</td>
+                    <td>{{tour_zeit.[2]}}</td>
+                    <td>{{tour_zeit.[3]}}</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <th>Empfänger</th>
+                    <td>{{emp_name}}</td>
+                    <th>Empfänger-PLZ</th>
+                    <td>{{emp_plz}}</td>
+                </tr>
+                <tr>
+                    <th>Absender</th>
+                    <td>{{abd_name}}</td>
+                    <th>Absender-PLZ</th>
+                    <td>{{abd_plz}}</td>
+                </tr>
+            </table> --}}
+            <span>* Es gibt max. 3 Abholversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe von Gründen
+                rückgängig gemacht werden.</span></li>
+        </ul>
+
+        {{!-- Button alligment: https://stackoverflow.com/questions/6632340/place-a-button-right-aligned --}}
+
+        <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+        <a href="/reserve" class="btn btn-reverse">Retourefach reservieren</a>
+        </div>
+        {{!-- {{#if test}}
+        <p>test!</p>
+        {{else}}
+        <p>no test! </p>
+        {{/if}} --}}
+    </div>
+    {{else}}
+    <p>Keine Daten verfügbar.</p>
+    {{/each}}
+</section>
+
+{{!--
+transport_status, paket_id, paket_bez, fach_id, fach_bez, zbs_id, zbs_bez, tour_id, tour_bez, tour, emp_id, emp_name,
+emp_plz, abd_id, abd_name, abd_plz, abholversuch
+--}}
