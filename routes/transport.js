@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     models.Transport.findAll()
         .then(transport => {
             // console.log(Object.keys(transport))
-            console.log(transport)
+            // console.log(transport)
             // console.log(Object.entries(transport))
             res.render('transport', {
                 transport
@@ -31,21 +31,6 @@ router.get('/add', (req, res) => res.render('add'))
 
 // Add transport (hardcoded to start with)
 router.post('/add', (req, res) => {
-    // const data = {
-    //     transport_status: 1,
-    //     paket_id: 7,
-    //     paket_bez: 'Watch',
-    //     fach_bez: 'Fach 6',
-    //     zbs_bez: 'ZBS 1',
-    //     tour_bez: 'NRW 1',
-    //     tour: ['00000', '00001', '00002', '00003', '00ß00'],
-    //     emp_name: 'Charlie',
-    //     emp_plz: '00001',
-    //     abd_name: 'Bob',
-    //     abd_plz: '00001',
-    //     abholversuch: 0,
-    //     alter:0
-    // }
 
     let { paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, emp_name, emp_plz, abd_name, abd_plz } = req.body
 
@@ -84,8 +69,6 @@ router.post('/add', (req, res) => {
         errors.push({ text: 'Absender-PLZ hinzufügen!' })
     }
 
-    // console.log(errors)
-
     // Check for errors
     if (errors.length > 0) {
         res.render('add', {
@@ -94,37 +77,28 @@ router.post('/add', (req, res) => {
         })
     } else {
         // Prepare tour array for Sequelize
-        tour = tour.split(',')
+        // tour = tour.split(',')
+
         // Insert into table
         models.Transport.create({
             paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, emp_name, emp_plz, abd_name, abd_plz
         })
-        .then(transport => res.redirect('/transport'))
+        .then(transport => {
+            // Since no errors where found push confirmation
+            errors.push({ text: 'Transportauftrag erfolgreich hinzugefügt' })
+            res.render('add',{
+                errors
+            })
+        })
         .catch(err => console.log(err))
     }
 })
 
-// search for transport
-// router.get('/search', (req, res) => {
-//     const { term } = req.query
-//     models.Transport.findAll({
-//         where: {
-//             id : {
-//                 [Op.iLike]:'%'+term+'%'
-//             }
-//         }
-//     })
-//     .then(transport => res.render('transport',{transport}))
-//     .catch(err => console.log(err))
-// })
-
 router.get('/search', (req, res) => {
     let {term} = req.query
 
+    // parte into integer
     term = parseInt(term)
-
-    // console.log(term)
-    // console.log(typeof term)
 
     models.Transport.findAll({
         where:{

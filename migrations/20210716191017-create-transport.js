@@ -10,7 +10,7 @@ module.exports = {
       },
       transport_status: {
         type: Sequelize.STRING,
-        defaultValue: 'abholbereit'
+        defaultValue: 'abholbereit 📬'
       },
       paket_id: {
         type: Sequelize.INTEGER,
@@ -24,7 +24,7 @@ module.exports = {
       },
       fach_status: {
         type: Sequelize.STRING,
-        defaultValue:'belegt'
+        defaultValue:'belegt 🔐'
       },
       zbs_bez: {
         type: Sequelize.STRING
