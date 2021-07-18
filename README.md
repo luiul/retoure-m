@@ -1,6 +1,11 @@
 # 🚚 Retouren App with Sequelize Migration
 
-Updated [🚚 Retouren App](https://github.com/luiul/retoure) with Sequelize Migration to better duplicate results. Run the following commands in the shell to set up the database:
+Updated [🚚 Retouren App](https://github.com/luiul/retoure) with Sequelize Migration to better duplicate results. Prerequisites:
+
+- PostgreSQL: install PostgresSQL and create a database.
+- node.js: install node.js.
+
+Run the following commands in the shell to set up the project:
 
 ```zsh
 npm init -y;
@@ -10,7 +15,7 @@ npm install --save-dev sequelize-cli;
 npx sequelize-cli init;
 ```
 
-Set up the `config.json` file in the `config` folder. Make model, migrate to PostgreSQL by running the following commands in the shell:
+Set up the `config.json` file in the `config` folder. Make model, migrate to PostgreSQL by running the following commands in the shell (after updating `scripts` in `package.json`):
 
 ```zsh
 npm run make-model;
