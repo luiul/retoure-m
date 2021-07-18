@@ -14,10 +14,10 @@ const Op = Sequelize.Op
 
 // Get all transports
 router.get('/', (req, res) => {
-    models.Transport.findAll()
+    models.Transport.findAll({raw:true})
         .then(transport => {
             // console.log(Object.keys(transport))
-            // console.log(transport)
+            console.log(transport)
             // console.log(Object.entries(transport))
             res.render('transport', {
                 transport,
@@ -107,7 +107,8 @@ router.get('/search', (req, res) => {
     models.Transport.findAll({
         where:{
             paket_id:term
-        }
+        },
+        raw : true
     })
     .then(transport => {
         console.log(transport)

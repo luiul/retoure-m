@@ -72,7 +72,7 @@ for each row
 execute procedure pickup()
 ```
 
-Example of a `Transport` object returned from the database:
+Example of an instance of the `Transport` model returned from the database:
 
 ```javascript
 [
@@ -126,6 +126,33 @@ Example of a `Transport` object returned from the database:
       attributes: [Array]
     },
     isNewRecord: false
+  }
+]
+```
+
+By using the keyword `raw` to the query, it will return a plan JSON instead of a Model instance:
+
+```javascript
+[
+  {
+    id: 1,
+    transport_status: 'abgeholt 📭',
+    paket_id: 1,
+    paket_bez: 'Laptop',
+    fach_bez: 'Fach 1',
+    fach_status: 'frei 🔓',
+    zbs_bez: 'ZBS 1',
+    tour_bez: 'NRW 1',
+    tour: [ '00000', '00001', '00002', '00000' ],
+    tour_zeit: [ '6:00 - 8:00', '9:00 - 11:00', '12:00 - 14:00', '15:00 - 17:00' ],
+    emp_name: 'Alice',
+    emp_plz: '00001',
+    abd_name: 'Bob',
+    abd_plz: '00001',
+    abholversuch: 0,
+    alter: 0,
+    createdAt: 2021-07-17T21:53:34.805Z,
+    updatedAt: 2021-07-17T21:53:34.805Z
   }
 ]
 ```
