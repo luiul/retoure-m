@@ -56,8 +56,8 @@ create or replace function pickup()
 returns trigger as
 $$
 begin
-	if new.transport_status = 'abgeholt' then
-		new.fach_status:='frei';
+	if new.transport_status = 'abgeholt 📭' then
+		new.fach_status:='frei 🔓';
 	end if;
 return new;
 end

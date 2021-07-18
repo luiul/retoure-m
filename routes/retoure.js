@@ -8,6 +8,6 @@ const db = require('../config/database')
 const Op = Sequelize.Op
 
 // Testing transport page for the first time
-router.get('/', (req, res) => res.send('RESERVE'))
+router.get('/', (req, res) => res.send('RETOURE'))
 
 module.exports = router

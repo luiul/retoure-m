@@ -74,7 +74,8 @@
                     <td>{{abd_plz}}</td>
                 </tr>
             </table> --}}
-            <span>* Es gibt max. 3 Abhol- und Retoureversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe von
+            <span>* Es gibt max. 3 Abhol- und Retoureversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe
+                von
                 Gründen
                 rückgängig gemacht werden.</span></li>
         </ul>
@@ -103,9 +104,15 @@
         <p>{{text}}</p>
     </div>
     {{else}}
-     <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
-            <a href="/reserve" class="btn btn-reverse">Retourefach reservieren</a>
+        {{#if reserve}}
+        <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+            <a href="/retoure" class="btn btn-reverse">Retoure beantragen</a>
         </div>
+        {{else}}
+        <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+            <a href="/retoure" class="btn btn-reverse">Retourefach reservieren</a>
+        </div>
+        {{/if}}
     {{/each}}
 </section>
 

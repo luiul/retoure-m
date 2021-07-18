@@ -4,7 +4,8 @@ const Sequelize = require('sequelize')
 const models = require('../models/index');
 
 // Might not be required in the final version
-const db = require('../config/database')
+const db = require('../config/database');
+const { truncate } = require('../config/database');
 const Op = Sequelize.Op
 
 // Testing transport page for the first time
@@ -32,17 +33,12 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))
 })
 
-// Display add transport form
+// Display add transport form; add transport
 router.get('/add', (req, res) => res.render('add'))
-
-// Add transport (hardcoded to start with)
 router.post('/add', (req, res) => {
-
     let { paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, emp_name, emp_plz, abd_name, abd_plz } = req.body
-
     // Server-side validation
     let errors = [];
-
     // Validate Fields
     if (!paket_id) {
         errors.push({ text: 'Packet-ID hinzufügen!' })
@@ -59,9 +55,6 @@ router.post('/add', (req, res) => {
     if (!tour_bez) {
         errors.push({ text: 'Tour-Bezeichnung hinzufügen!' })
     }
-    // if (!tour) {
-    //     errors.push({ text: 'Tour hinzufügen!' })
-    // }
     if (!emp_name) {
         errors.push({ text: 'Empfänger hinzufügen!' })
     }
@@ -81,10 +74,6 @@ router.post('/add', (req, res) => {
             paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, emp_name, emp_plz, abd_name, abd_plz
         })
     } else {
-        // Prepare tour array for Sequelize
-        // tour = tour.split(',')
-
-        // Insert into table
         models.Transport.create({
             paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, emp_name, emp_plz, abd_name, abd_plz
         })
@@ -100,37 +89,66 @@ router.post('/add', (req, res) => {
     }
 })
 
+// Display book recieve; update transport
+router.get('/abholung', (req, res) => res.render('abholung'))
+router.post('/abholung', (req, res) => {
+    let { paket_id } = req.body
+    console.log(paket_id)
+
+    let errors = [];
+    // Validate Fields
+    if (!paket_id) {
+        errors.push({ text: 'Packet-ID hinzufügen!' })
+    }
+
+    // Check for errors
+    if (errors.length > 0) {
+        res.render('abholung', {
+            errors, paket_id
+        })
+    } else {
+        var values = { transport_status: 'abgeholt 📭', fach_status:'frei 🔓'}
+        var selector = { where: { paket_id: paket_id } }
+            models.Transport.update(values, selector)
+                .then(transport => {
+                    // transport.update({ transport_status: 'abgeholt 📭' })
+                    let confirmation = { text: 'Paketabholung erfolgreich gebucht' }
+                    res.render('abholung', { confirmation })
+                })
+        }
+    })
+
+
+// Search by package id in homepage
 router.get('/search', (req, res) => {
 
-    let { term } = req.query
+    let { paket_id } = req.query
     // parte into integer
-    term = parseInt(term)
-
-    // let test = true;
-
-    // let test = []
-    // test.push({ boolean: true })
+    paket_id = parseInt(paket_id)
 
     models.Transport.findAll({
-        where: {
-            paket_id: term
-        },
+        where: { paket_id: paket_id },
         raw: true
     })
         .then(transport => {
             // server side error checking
             let errors = [];
+            let reserve = [];
             // check age
-            if (transport.length==0){
-                errors.push({text:'Paket-ID nicht vorhanden'})
+            if (transport.length == 0) {
+                errors.push({ text: 'Paket-ID nicht vorhanden' })
             }
-            if (transport.length!=0 && transport[0].versuch > 3) {
-                errors.push({ text: 'Max. Retoureversuche überschritten'})
+            if (transport.length != 0 && transport[0].versuch > 3) {
+                errors.push({ text: 'Max. Retoureversuche überschritten' })
             }
-            if (transport.length!=0 && transport[0].alter > 14) {
-                errors.push({ text: 'Bestellung außerhalb Retourefrist'})
+            if (transport.length != 0 && transport[0].alter > 14) {
+                errors.push({ text: 'Bestellung außerhalb Retourefrist' })
+            }
+            if (transport.length != 0 && transport[0].transport_status == 'abholbereit 📬') {
+                reserve.push(true)
             }
             res.render('transport_id', {
+                reserve,
                 errors,
                 transport
             })
