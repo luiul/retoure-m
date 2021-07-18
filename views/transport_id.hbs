@@ -17,7 +17,7 @@
                     <td>{{paket_bez}}</td>
                 </tr>
                 <tr>
-                    <th>Abholversuche</th>
+                    <th>Abgabeversuche</th>
                     <td>{{abholversuch}}</td>
                 </tr>
                 <tr>
@@ -74,21 +74,38 @@
                     <td>{{abd_plz}}</td>
                 </tr>
             </table> --}}
-            <span>* Es gibt max. 3 Abholversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe von Gründen
+            <span>* Es gibt max. 3 Abhol- und Abgabeversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe von
+                Gründen
                 rückgängig gemacht werden.</span></li>
         </ul>
 
         {{!-- Button alligment: https://stackoverflow.com/questions/6632340/place-a-button-right-aligned --}}
-
-        <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
-        <a href="/reserve" class="btn btn-reverse">Retourefach reservieren</a>
+        {{!-- {{#each errors}}
+        <div class="error">
+            <p>{{text}}</p>
         </div>
+        {{else}}
+        <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+            <a href="/reserve" class="btn btn-reverse">Retourefach reservieren</a>
+        </div>
+        {{/each}} --}}
         {{!-- {{#if test}}
         test is true!
         {{/if}} --}}
+
     </div>
     {{else}}
     <p>Keine Daten verfügbar.</p>
+    {{/each}}
+
+    {{#each errors}}
+    <div class="error">
+        <p>{{text}}</p>
+    </div>
+    {{else}}
+     <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+            <a href="/reserve" class="btn btn-reverse">Retourefach reservieren</a>
+        </div>
     {{/each}}
 </section>
 

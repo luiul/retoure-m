@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Sequelize = require('sequelize')
-const models = require( '../models/index');
+const models = require('../models/index');
 
 // Might not be required in the final version
 const db = require('../config/database')
@@ -14,11 +14,17 @@ const Op = Sequelize.Op
 
 // Get all transports
 router.get('/', (req, res) => {
-    models.Transport.findAll({raw:true})
+    models.Transport.findAll({ raw: true })
         .then(transport => {
+
             // console.log(Object.keys(transport))
-            console.log(transport)
+            // console.log(transport.get)
             // console.log(Object.entries(transport))
+            // --> Start using raw queries to simply model!
+
+            // let test = [{text : 'test_text'}]
+            // console.log(test[0].text)
+
             res.render('transport', {
                 transport,
             })
@@ -68,7 +74,6 @@ router.post('/add', (req, res) => {
     if (!abd_plz) {
         errors.push({ text: 'Absender-PLZ hinzufügen!' })
     }
-
     // Check for errors
     if (errors.length > 0) {
         res.render('add', {
@@ -83,19 +88,21 @@ router.post('/add', (req, res) => {
         models.Transport.create({
             paket_id, paket_bez, fach_bez, zbs_bez, tour_bez, emp_name, emp_plz, abd_name, abd_plz
         })
-        .then(transport => {
-            // Since no errors where found push confirmation
-            errors.push({ text: 'Transportauftrag erfolgreich hinzugefügt' })
-            res.render('add',{
-                errors
+            .then(transport => {
+                // Since no errors where found push confirmation
+                let confirmation = { text: 'Transportauftrag erfolgreich hinzugefügt' }
+                // errors.push({ text: 'Transportauftrag erfolgreich hinzugefügt' })
+                res.render('add', {
+                    confirmation
+                })
             })
-        })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
     }
 })
 
 router.get('/search', (req, res) => {
-    let {term} = req.query
+
+    let { term } = req.query
     // parte into integer
     term = parseInt(term)
 
@@ -105,18 +112,27 @@ router.get('/search', (req, res) => {
     // test.push({ boolean: true })
 
     models.Transport.findAll({
-        where:{
-            paket_id:term
+        where: {
+            paket_id: term
         },
-        raw : true
+        raw: true
     })
-    .then(transport => {
-        console.log(transport)
-        res.render('transport_id',{
-            transport
+        .then(transport => {
+            // server side error checking
+            let errors = [];
+            // check age
+            if (transport.length==0){
+                errors.push({text:'Paket-ID nicht vorhanden'})
+            }
+            if (transport.length!=0 && transport[0].alter > 14) {
+                errors.push({ text: 'Bestellung außerhalb Retourefrist'})
+            }
+            res.render('transport_id', {
+                errors,
+                transport
+            })
         })
-    })
-    .catch(err => console.log(err))
+        .catch(err => console.log(err))
 })
 
 module.exports = router

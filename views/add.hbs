@@ -8,12 +8,18 @@
     </div>
     {{/each}}
 
+    {{#if confirmation}}
+    <div class="confirmation">
+      <p>{{confirmation.text}}</p>
+    </div>
+    {{/if}}
+
     <form action="/transport/add" method="POST">
 
       <div class="input-group">
         <label for="paket_id">Packet-ID</label>
-        <input type="number" min="0" step="1" name="paket_id" id="paket_id" class="input-box" placeholder="z.B. 1" maxlength="100"
-          value={{paket_id}}>
+        <input type="number" min="0" step="1" name="paket_id" id="paket_id" class="input-box" placeholder="z.B. 1"
+          maxlength="100" value={{paket_id}}>
       </div>
 
 

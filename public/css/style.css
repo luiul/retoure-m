@@ -43,6 +43,20 @@ a:hover {
   padding: 5px;
   border: #777 dotted 1px;
   margin-bottom: 15px;
+  background-color: rgb(196, 96, 96);
+  text-align: center;
+  /* font-weight: bold; */
+  color: #fff;
+}
+
+.confirmation {
+  padding: 5px;
+  border: #777 dotted 1px;
+  margin-bottom: 15px;
+  background-color: var(--primary-color);
+  text-align: center;
+  /* font-weight: bold; */
+  color: #fff;
 }
 
 /* Header */
