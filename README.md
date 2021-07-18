@@ -71,3 +71,61 @@ before update on "Transports"
 for each row
 execute procedure pickup()
 ```
+
+Example of a `Transport` object returned from the database:
+
+```javascript
+[
+  Transport {
+    dataValues: {
+      id: 1,
+      transport_status: 'abgeholt 📭',
+      paket_id: 1,
+      paket_bez: 'Laptop',
+      fach_bez: 'Fach 1',
+      fach_status: 'frei 🔓',
+      zbs_bez: 'ZBS 1',
+      tour_bez: 'NRW 1',
+      tour: [Array],
+      tour_zeit: [Array],
+      emp_name: 'Alice',
+      emp_plz: '00001',
+      abd_name: 'Bob',
+      abd_plz: '00001',
+      abholversuch: 0,
+      alter: 0,
+      createdAt: 2021-07-17T21:53:34.805Z,
+      updatedAt: 2021-07-17T21:53:34.805Z
+    },
+    _previousDataValues: {
+      id: 1,
+      transport_status: 'abgeholt 📭',
+      paket_id: 1,
+      paket_bez: 'Laptop',
+      fach_bez: 'Fach 1',
+      fach_status: 'frei 🔓',
+      zbs_bez: 'ZBS 1',
+      tour_bez: 'NRW 1',
+      tour: [Array],
+      tour_zeit: [Array],
+      emp_name: 'Alice',
+      emp_plz: '00001',
+      abd_name: 'Bob',
+      abd_plz: '00001',
+      abholversuch: 0,
+      alter: 0,
+      createdAt: 2021-07-17T21:53:34.805Z,
+      updatedAt: 2021-07-17T21:53:34.805Z
+    },
+    _changed: Set {},
+    _options: {
+      isNewRecord: false,
+      _schema: null,
+      _schemaDelimiter: '',
+      raw: true,
+      attributes: [Array]
+    },
+    isNewRecord: false
+  }
+]
+```

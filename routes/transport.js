@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
             // console.log(transport)
             // console.log(Object.entries(transport))
             res.render('transport', {
-                transport
+                transport,
             })
         })
         .catch(err => console.log(err))
@@ -99,13 +99,18 @@ router.get('/search', (req, res) => {
     // parte into integer
     term = parseInt(term)
 
+    // let test = true;
+
+    // let test = []
+    // test.push({ boolean: true })
+
     models.Transport.findAll({
         where:{
             paket_id:term
         }
     })
     .then(transport => {
-        // errors.push({ text: 'test!' })
+        console.log(transport)
         res.render('transport_id',{
             transport
         })
