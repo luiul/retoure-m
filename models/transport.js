@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     emp_plz: DataTypes.STRING,
     abd_name: DataTypes.STRING,
     abd_plz: DataTypes.STRING,
-    abholversuch: DataTypes.INTEGER,
+    versuch: DataTypes.INTEGER,
     alter: DataTypes.INTEGER
   }, {
     sequelize,

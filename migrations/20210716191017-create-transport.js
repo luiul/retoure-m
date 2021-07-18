@@ -50,7 +50,7 @@ module.exports = {
       abd_plz: {
         type: Sequelize.STRING
       },
-      abholversuch: {
+      versuch: {
         type: Sequelize.INTEGER,
         defaultValue: '0'
       },

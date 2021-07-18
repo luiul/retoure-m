@@ -124,6 +124,9 @@ router.get('/search', (req, res) => {
             if (transport.length==0){
                 errors.push({text:'Paket-ID nicht vorhanden'})
             }
+            if (transport.length!=0 && transport[0].versuch > 3) {
+                errors.push({ text: 'Max. Retoureversuche überschritten'})
+            }
             if (transport.length!=0 && transport[0].alter > 14) {
                 errors.push({ text: 'Bestellung außerhalb Retourefrist'})
             }
