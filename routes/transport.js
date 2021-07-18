@@ -143,19 +143,19 @@ router.post('/retoure', (req, res) => {
 
     if (isNaN(paket_id)) {
         errors.push({ text: 'Bitte Paket-ID im zulässigen Bereich eingeben' })
-        res.render('abholung', { errors })
+        res.render('retoure', { errors })
     }
 
     models.Transport.findAll(selector_raw)
     .then(transport => {
         if(transport.length == 0){
             errors.push({text:'Paket-ID nicht vorhanden'})
-            res.render('abholung',{errors})
+            res.render('retoure',{errors})
         } else {
             models.Transport.update(values, selector)
             .then(trans => {
                 let confirmation = { text: 'Retoure erfolgreich gebucht' }
-                res.render('abholung', { confirmation })
+                res.render('retoure', { confirmation })
 
             })
 
@@ -173,6 +173,7 @@ router.get('/search', (req, res) => {
     var selector = { where: { paket_id: paket_id }, raw: true }
     let errors = [];
     let reserve = [];
+    let confirmation;
 
     // parse into integer
     paket_id = parseInt(paket_id)
@@ -193,10 +194,14 @@ router.get('/search', (req, res) => {
             if (transport.length != 0 && transport[0].alter > 14) {
                 errors.push({ text: 'Bestellung außerhalb Retourefrist' })
             }
+            if (transport.length != 0 && transport[0].transport_status == 'retouniert 📦'){
+                confirmation = { text: 'Paket erfolgreich retouniert' }
+            }
             if (transport.length != 0 && transport[0].transport_status == 'abholbereit 📬') {
                 reserve.push(true)
             }
             res.render('transport_id', {
+                confirmation,
                 reserve,
                 errors,
                 transport

@@ -43,6 +43,13 @@ for each row
 execute procedure add_tour()
 ```
 
+```sql
+create trigger add_tour
+before update on "Transports"
+for each row
+execute procedure add_tour()
+```
+
 Run seed and populate the database by running the following command in the shell:
 
 ```zsh

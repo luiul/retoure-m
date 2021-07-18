@@ -100,21 +100,28 @@
     {{/each}}
 
     {{#each errors}}
-    <div class="error">
-        <p>{{text}}</p>
-    </div>
-    {{else}}
-        {{#if reserve}}
-        <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
-            <a href="/retoure" class="btn btn-reverse">Retoure beantragen</a>
+        <div class="error">
+            <p>{{text}}</p>
         </div>
         {{else}}
-        <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
-            <a href="/retoure" class="btn btn-reverse">Retourefach reservieren</a>
-        </div>
-        {{/if}}
+            {{#if confirmation}}
+            <div class="confirmation">
+                <p>{{confirmation.text}}</p>
+            </div>
+            {{else}}
+                {{#if reserve}}
+                <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+                    <a href="/retoure" class="btn btn-reverse">Retoure beantragen</a>
+                </div>
+                {{else}}
+                <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+                    <a href="/retoure" class="btn btn-reverse">Retourefach reservieren</a>
+                </div>
+                {{/if}}
+            {{/if}}
     {{/each}}
 </section>
+
 
 {{!--
 transport_status, paket_id, paket_bez, fach_id, fach_bez, zbs_id, zbs_bez, tour_id, tour_bez, tour, emp_id, emp_name,
