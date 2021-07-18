@@ -89,7 +89,7 @@ router.post('/add', (req, res) => {
     }
 })
 
-// Display book receive; update transport
+// Display and book receive
 router.get('/abholung', (req, res) => res.render('abholung'))
 router.post('/abholung', (req, res) => {
     // read and assign request body
@@ -118,6 +118,43 @@ router.post('/abholung', (req, res) => {
             models.Transport.update(values, selector)
             .then(trans => {
                 let confirmation = { text: 'Paketabholung erfolgreich gebucht' }
+                res.render('abholung', { confirmation })
+
+            })
+
+        }
+    })
+})
+
+// Display and book return
+router.get('/retoure', (req, res) => res.render('retoure'))
+router.post('/retoure', (req, res) => {
+    // read and assign request body
+    let { paket_id } = req.body
+
+    // set parameters
+    var values = { transport_status: 'retouniert 📦', fach_status: 'frei 🔓' }
+    var selector_raw = { where: { paket_id: paket_id }, raw: true }
+    var selector = { where: { paket_id: paket_id }}
+    let errors = [];
+
+    // parse into integer
+    paket_id = parseInt(paket_id)
+
+    if (isNaN(paket_id)) {
+        errors.push({ text: 'Bitte Paket-ID im zulässigen Bereich eingeben' })
+        res.render('abholung', { errors })
+    }
+
+    models.Transport.findAll(selector_raw)
+    .then(transport => {
+        if(transport.length == 0){
+            errors.push({text:'Paket-ID nicht vorhanden'})
+            res.render('abholung',{errors})
+        } else {
+            models.Transport.update(values, selector)
+            .then(trans => {
+                let confirmation = { text: 'Retoure erfolgreich gebucht' }
                 res.render('abholung', { confirmation })
 
             })

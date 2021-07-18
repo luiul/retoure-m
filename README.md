@@ -52,7 +52,7 @@ npm run seed
 After populating the database we can add the pickup trigger with the following `create or replace function` and `create trigger` statements in PostgreSQL:
 
 ```sql
-create or replace function pickup()
+create or replace function pickup_task()
 returns trigger as
 $$
 begin
@@ -66,10 +66,52 @@ language plpgsql
 ```
 
 ```sql
-create trigger pickup
+create trigger pickup_task
 before update on "Transports"
 for each row
-execute procedure pickup()
+execute procedure pickup_task()
+```
+
+```sql
+create or replace function add_task()
+returns trigger as
+$$
+begin
+	if new.transport_status = 'abholbereit 📬' then
+		new.fach_status:='belegt 🔒';
+	end if;
+return new;
+end
+$$
+language plpgsql
+```
+
+```sql
+create trigger add_task
+before update on "Transports"
+for each row
+execute procedure add_task()
+```
+
+```sql
+create or replace function return_task()
+returns trigger as
+$$
+begin
+	if new.transport_status = 'retouniert 📦' then
+		new.fach_status:='belegt 🔒';
+	end if;
+return new;
+end
+$$
+language plpgsql
+```
+
+```sql
+create trigger return_task
+before update on "Transports"
+for each row
+execute procedure return_task()
 ```
 
 Example of an instance of the `Transport` model returned from the database:
