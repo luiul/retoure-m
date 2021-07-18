@@ -89,52 +89,64 @@ router.post('/add', (req, res) => {
     }
 })
 
-// Display book recieve; update transport
+// Display book receive; update transport
 router.get('/abholung', (req, res) => res.render('abholung'))
 router.post('/abholung', (req, res) => {
+    // read and assign request body
     let { paket_id } = req.body
-    console.log(paket_id)
 
+    // set parameters
+    var values = { transport_status: 'abgeholt 📭', fach_status: 'frei 🔓' }
+    var selector_raw = { where: { paket_id: paket_id }, raw: true }
+    var selector = { where: { paket_id: paket_id }}
     let errors = [];
-    // Validate Fields
-    if (!paket_id) {
-        errors.push({ text: 'Packet-ID hinzufügen!' })
+
+    // parse into integer
+    paket_id = parseInt(paket_id)
+
+    if (isNaN(paket_id)) {
+        errors.push({ text: 'Bitte Paket-ID im zulässigen Bereich eingeben' })
+        res.render('abholung', { errors })
     }
 
-    // Check for errors
-    if (errors.length > 0) {
-        res.render('abholung', {
-            errors, paket_id
-        })
-    } else {
-        var values = { transport_status: 'abgeholt 📭', fach_status:'frei 🔓'}
-        var selector = { where: { paket_id: paket_id } }
+    models.Transport.findAll(selector_raw)
+    .then(transport => {
+        if(transport.length == 0){
+            errors.push({text:'Paket-ID nicht vorhanden'})
+            res.render('abholung',{errors})
+        } else {
             models.Transport.update(values, selector)
-                .then(transport => {
-                    // transport.update({ transport_status: 'abgeholt 📭' })
-                    let confirmation = { text: 'Paketabholung erfolgreich gebucht' }
-                    res.render('abholung', { confirmation })
-                })
+            .then(trans => {
+                let confirmation = { text: 'Paketabholung erfolgreich gebucht' }
+                res.render('abholung', { confirmation })
+
+            })
+
         }
     })
+})
 
 
 // Search by package id in homepage
 router.get('/search', (req, res) => {
-
+    // read and assign request body
     let { paket_id } = req.query
-    // parte into integer
+
+    // set parameters
+    var selector = { where: { paket_id: paket_id }, raw: true }
+    let errors = [];
+    let reserve = [];
+
+    // parse into integer
     paket_id = parseInt(paket_id)
 
-    models.Transport.findAll({
-        where: { paket_id: paket_id },
-        raw: true
-    })
+    if (isNaN(paket_id)) {
+        errors.push({ text: 'Bitte Paket-ID im zulässigen Bereich eingeben' })
+        res.render('transport_id', { errors })
+    }
+
+    models.Transport.findAll(selector)
         .then(transport => {
-            // server side error checking
-            let errors = [];
-            let reserve = [];
-            // check age
             if (transport.length == 0) {
                 errors.push({ text: 'Paket-ID nicht vorhanden' })
             }
