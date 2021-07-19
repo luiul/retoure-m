@@ -7,7 +7,7 @@ Updated [🚚 Retouren App](https://github.com/luiul/retoure) with Sequelize mig
 
 ## Set up
 
-Run the following commands in the shell to set up the project. We start by setting up node.js and Sequelize to migrate and seed the schema and data:
+Run the following commands in the shell to set up the project. Start by setting up node.js and Sequelize to migrate and seed the schema and data:
 
 ```zsh
 npm init -y;
@@ -47,14 +47,14 @@ language plpgsql
 Make PostgreSQL trigger by running the following `create trigger` statement in the Query Tool:
 
 ```sql
-create trigger add_tour
+create trigger add_tour_i
 before insert on "Transports"
 for each row
 execute procedure add_tour()
 ```
 
 ```sql
-create trigger add_tour
+create trigger add_tour_u
 before update on "Transports"
 for each row
 execute procedure add_tour()
@@ -66,7 +66,7 @@ Run seed and populate the database by running the following command in the shell
 npm run seed
 ```
 
-After populating the database we can add the pickup trigger with the following `create or replace function` and `create trigger` statements in PostgreSQL:
+After populating the database add the pickup, add, and return triggers with the following `create or replace function` and `create trigger` statements in PostgreSQL:
 
 ```sql
 create or replace function pickup_task()
@@ -130,6 +130,17 @@ before update on "Transports"
 for each row
 execute procedure return_task()
 ```
+
+The table for the project would be equivalent to the following PostgreSQL view:
+
+```sql
+create view "Transports" as
+select id, tranport_status, paket_id, paket_bez, fach_bez, fach_status, zbs_bez, tour_bez, tour, tour_zeit, emp_name, abd_name, abd_plz, versuch, "alter", "createdAt", "updatedAt"
+from tour, zbs, fach, paket, paket_transport, emp, abd, ort
+where tour.tour_id = zbs.tour_id, zbs.fach_id = fach.fach_id, zbs.paket_id = paket.paket_id, paket.paket_id = paket_transport.paket_id, fach.fach_id = paket_transport.fach_id, paket_transport.emp_id = emp.emp_id, paket_transport.abd_id = abd.abd_id, emp.plz = ort.plz, abd.plz = ort.plz
+```
+
+Note that to simplify the data model and model objects of our project we opted out of using multiple tables in the database, creating this view and working with it.
 
 Install other dependencies for the project:
 
