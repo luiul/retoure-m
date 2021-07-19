@@ -21,8 +21,8 @@ module.exports = {
         {
           paket_id: 2,
           paket_bez: 'Handy',
-          fach_bez: 'Fach 2',
-          zbs_bez: 'ZBS 1',
+          fach_bez: 'Fach 1',
+          zbs_bez: 'ZBS 2',
           tour_bez: 'NRW 1',
           emp_name: 'Charlie',
           emp_plz: '00002',
@@ -34,7 +34,7 @@ module.exports = {
         {
           paket_id: 3,
           paket_bez: 'Mouse',
-          fach_bez: 'Fach 3',
+          fach_bez: 'Fach 2',
           zbs_bez: 'ZBS 1',
           tour_bez: 'NRW 1',
           emp_name: 'Emilie',
@@ -47,8 +47,8 @@ module.exports = {
         {
           paket_id: 4,
           paket_bez: 'Tastatur',
-          fach_bez: 'Fach 4',
-          zbs_bez: 'ZBS 1',
+          fach_bez: 'Fach 2',
+          zbs_bez: 'ZBS 2',
           tour_bez: 'NRW 1',
           emp_name: 'Gerard',
           emp_plz: '00002',
@@ -60,7 +60,7 @@ module.exports = {
         {
           paket_id: 5,
           paket_bez: 'HDMI',
-          fach_bez: 'Fach 5',
+          fach_bez: 'Fach 3',
           zbs_bez: 'ZBS 1',
           tour_bez: 'NRW 1',
           emp_name: 'Gerard',
@@ -69,7 +69,46 @@ module.exports = {
           abd_plz: '00002',
           createdAt: new Date(),
           updatedAt: new Date()
-      }
+        },
+        {
+          paket_id: 6,
+          paket_bez: 'Monitor',
+          fach_bez: 'Fach 1',
+          zbs_bez: 'ZBS 3',
+          tour_bez: 'NRW 2',
+          emp_name: 'Alice',
+          emp_plz: '00001',
+          abd_name: 'Bob',
+          abd_plz: '00001',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          paket_id: 7,
+          paket_bez: 'iPhone',
+          fach_bez: 'Fach 2',
+          zbs_bez: 'ZBS 3',
+          tour_bez: 'NRW 2',
+          emp_name: 'Charlie',
+          emp_plz: '00002',
+          abd_name: 'David',
+          abd_plz: '00001',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          paket_id: 8,
+          paket_bez: 'Mouse',
+          fach_bez: 'Fach 3',
+          zbs_bez: 'ZBS 3',
+          tour_bez: 'NRW 2',
+          emp_name: 'Emilie',
+          emp_plz: '00001',
+          abd_name: 'Felix',
+          abd_plz: '00002',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
       ]
     )
   },

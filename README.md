@@ -32,7 +32,10 @@ returns trigger as
 $$
 begin
  if new.tour_bez = 'NRW 1' then
-  new.tour:='{"00000", "00001", "00002", "00000"}';
+  new.tour:='{"00000", "00001", "00002", "00003"}';
+  new.tour_zeit:='{"6:00 - 8:00", "9:00 - 11:00", "12:00 - 14:00", "15:00 - 17:00"}';
+  elsif new.tour_bez = 'NRW 2' then
+  new.tour:='{"00003", "00002", "00001", "00000"}';
   new.tour_zeit:='{"6:00 - 8:00", "9:00 - 11:00", "12:00 - 14:00", "15:00 - 17:00"}';
  end if;
 return new;
