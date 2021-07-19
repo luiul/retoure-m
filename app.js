@@ -37,6 +37,3 @@ app.get('/', (req, res) => {
 
 // TRANSPORT ROUTE
 app.use('/transport', require('./routes/transport'))
-
-// RETOURE ROUTE
-app.use('/retoure', require('./routes/retoure'))
