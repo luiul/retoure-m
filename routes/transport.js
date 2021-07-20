@@ -179,6 +179,7 @@ router.get('/search', (req, res) => {
     let selector = { where: { paket_id: paket_id }, raw: true }
     let errors = [];
     let confirmation;
+    var fach = true
 
     // parse paket_id into integer
     paket_id = parseInt(paket_id)
@@ -216,6 +217,11 @@ router.get('/search', (req, res) => {
                 pickup_state = true
             } else { pickup_state = false }
 
+            // show container / fach
+            if(transport.length != 0 && (transport[0].transport_status == 'abgeholt 📭' || transport[0].transport_status == 'retouniert 📦')) {
+                fach = false
+            }
+
             // store p_bez and t_status outside scope
             p_bez = transport[0].paket_bez
             t_status = transport[0].transport_status
@@ -224,12 +230,15 @@ router.get('/search', (req, res) => {
             abd_name = transport[0].abd_name
             abd_plz = transport[0].abd_plz
 
+            console.log(transport)
+
             // render result
             res.render('transport_id', {
                 confirmation,
                 pickup_state,
                 errors,
-                transport
+                transport,
+                fach
             })
         })
         .catch(err => console.log(err))
