@@ -1,0 +1,35 @@
+<section id="search" class="container">
+  <h1>Das folgende Paket wird retuoniert</h1>
+  <div class="transport">
+    <ul>
+      <table>
+        <tr>
+          <th>Paketstatus</th>
+          <td>{{p_status.text}}</td>
+        </tr>
+        <tr>
+          <th>Paket-ID</th>
+          <td>{{p_id}}</td>
+        </tr>
+        <tr>
+          <th>Paket</th>
+          <td>{{p_bez}}</td>
+        </tr>
+      </table>
+      <span>* Es gibt max. 3 Abhol- und Retoureversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe
+        von
+        Gründen
+        rückgängig gemacht werden.</span></li>
+    </ul>
+
+  </div>
+  <h1>
+    🗺 Abgabe-PLZ eingeben
+  </h1>
+  <form action="/transport/search" class="search-form" method="GET">
+    <input type="search" name="plz" placeholder="PLZ eingeben ...">
+    <input type="submit" value="Suche" />
+  </form>
+
+
+</section>

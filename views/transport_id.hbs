@@ -45,15 +45,9 @@
                 <p>{{confirmation.text}}</p>
             </div>
             {{else}}
-                {{#if reserve}}
-                <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
-                    <a href="/transport/reserve" class="btn btn-reverse">Retoure beantragen</a>
-                </div>
-                {{else}}
-                <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
-                    <a href="/transport/reserve" class="btn btn-reverse">Retourefach reservieren</a>
-                </div>
-                {{/if}}
+            <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+                <a href="/transport/reserve" class="btn btn-reverse">{{p_status.text}}</a>
+            </div>
             {{/if}}
     {{/each}}
 </section>
