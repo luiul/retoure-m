@@ -4,7 +4,7 @@
     <p>{{confirmation.text}}</p>
   </div>
   {{else}}
-  <h1>Das folgende Paket wird retuoniert</h1>
+  <h3>📦 Das folgende Paket wird retuoniert</h3>
   {{/if}}
 
   <div class="transport">
@@ -32,20 +32,20 @@
   </div>
   {{#if confirmation}}
   {{else}}
+
     {{#if pickup_state}}
     {{!-- Package was picked up --}}
     <h2>
       🗺 Abgabe-PLZ eingeben
     </h2>
-    <form action="/transport/reserve" class="search-form" method="GET">
+    <form action="/transport/reserve/search" class="search-form" method="GET">
       <input type="search" name="plz" placeholder="PLZ eingeben ...">
       <input type="submit" value="Suche" />
     </form>
+
     {{else}}
     {{!-- Package was not picked up --}}
-
     <form action="/transport/reserve" method="POST">
-
       <div class="input-group" style="display:flex; justify-content:flex-end; width:100%; padding:0;">
         <input type="hidden" name="paket_id" id="paket_id" value={{p_id}}>
         <input type="submit" value="Retoure bestätigen" class="btn btn-reverse" style="font-size: 17px">

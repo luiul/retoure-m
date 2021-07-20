@@ -74,7 +74,7 @@ returns trigger as
 $$
 begin
  if new.transport_status = 'abgeholt 📭' then
-  new.fach_status:='frei 🔓';
+  new.fach_status:='frei 📥';
  end if;
 return new;
 end
@@ -168,7 +168,7 @@ Example of an instance of the `Transport` model returned from the database:
       paket_id: 1,
       paket_bez: 'Laptop',
       fach_bez: 'Fach 1',
-      fach_status: 'frei 🔓',
+      fach_status: 'frei 📥',
       zbs_bez: 'ZBS 1',
       tour_bez: 'NRW 1',
       tour: [Array],
@@ -188,7 +188,7 @@ Example of an instance of the `Transport` model returned from the database:
       paket_id: 1,
       paket_bez: 'Laptop',
       fach_bez: 'Fach 1',
-      fach_status: 'frei 🔓',
+      fach_status: 'frei 📥',
       zbs_bez: 'ZBS 1',
       tour_bez: 'NRW 1',
       tour: [Array],
@@ -225,7 +225,7 @@ By passing the parameter `raw = true` to the query, it will return an array with
     paket_id: 1,
     paket_bez: 'Laptop',
     fach_bez: 'Fach 1',
-    fach_status: 'frei 🔓',
+    fach_status: 'frei 📥',
     zbs_bez: 'ZBS 1',
     tour_bez: 'NRW 1',
     tour: [ '00000', '00001', '00002', '00000' ],

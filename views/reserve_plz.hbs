@@ -1,0 +1,85 @@
+<section id="search" class="container">
+
+  {{#if confirmation}}
+  <div class="confirmation">
+    <p>{{confirmation.text}}</p>
+  </div>
+  {{else}}
+  <h3>📦 Das folgende Paket wird retuoniert</h3>
+  {{/if}}
+
+  <div class="transport">
+    <ul>
+      <table>
+        <tr>
+          <th>Paketstatus</th>
+          <td>{{t_status}}</td>
+        </tr>
+        <tr>
+          <th>Paket-ID</th>
+          <td>{{p_id}}</td>
+        </tr>
+        <tr>
+          <th>Paket</th>
+          <td>{{p_bez}}</td>
+        </tr>
+      </table>
+      <span>* Es gibt max. 3 Abhol- und Retoureversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe
+        von
+        Gründen
+        rückgängig gemacht werden.</span></li>
+    </ul>
+  </div>
+
+  {{#each errors}}
+  <div class="error">
+    <p>{{text}}</p>
+  </div>
+  {{else}}
+  {{!-- No errors --}}
+    <h3>
+      📥 Freie Fächer in Abgabe-PLZ {{plz}}
+    </h3>
+    {{#each options}}
+    <div class="transport">
+      <ul>
+        <table>
+          <tr>
+            <th>Fach</th>
+            <td>{{fach_bez}}</td>
+          </tr>
+          <tr>
+            <th>Fachstatus</th>
+            <td>{{fach_status}}</td>
+          </tr>
+          <tr>
+            <th>ZBS</th>
+            <td>{{zbs_bez}}</td>
+          </tr>
+          <tr>
+            <th>Tour</th>
+            <td>{{tour_bez}}</td>
+          </tr>
+          <tr>
+            <th>Zeitfenster</th>
+            <td>{{tour_zeit}}</td>
+          </tr>
+        </table>
+      </ul>
+    </div>
+    {{else}}
+    <p>❌ Keine freien Fächer in Abgabe-PLZ {{plz}}</p>
+    {{/each}}
+
+  {{/each}}
+  <h2>
+    🗺 Abgabe-PLZ eingeben
+  </h2>
+  <form action="/transport/reserve/search" class="search-form" method="GET">
+    <input type="search" name="plz" placeholder="PLZ eingeben ...">
+    <input type="submit" value="Suche" />
+  </form>
+
+
+
+</section>
