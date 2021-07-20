@@ -1,11 +1,18 @@
 <section id="search" class="container">
+  {{#if confirmation}}
+  <div class="confirmation">
+    <p>{{confirmation.text}}</p>
+  </div>
+  {{else}}
   <h1>Das folgende Paket wird retuoniert</h1>
+  {{/if}}
+
   <div class="transport">
     <ul>
       <table>
         <tr>
           <th>Paketstatus</th>
-          <td>{{p_status.text}}</td>
+          <td>{{t_status}}</td>
         </tr>
         <tr>
           <th>Paket-ID</th>
@@ -23,13 +30,29 @@
     </ul>
 
   </div>
-  <h1>
-    🗺 Abgabe-PLZ eingeben
-  </h1>
-  <form action="/transport/search" class="search-form" method="GET">
-    <input type="search" name="plz" placeholder="PLZ eingeben ...">
-    <input type="submit" value="Suche" />
-  </form>
+  {{#if confirmation}}
+  {{else}}
+    {{#if pickup_state}}
+    {{!-- Package was picked up --}}
+    <h2>
+      🗺 Abgabe-PLZ eingeben
+    </h2>
+    <form action="/transport/reserve" class="search-form" method="GET">
+      <input type="search" name="plz" placeholder="PLZ eingeben ...">
+      <input type="submit" value="Suche" />
+    </form>
+    {{else}}
+    {{!-- Package was not picked up --}}
+
+    <form action="/transport/reserve" method="POST">
+
+      <div class="input-group" style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+        <input type="hidden" name="paket_id" id="paket_id" value={{p_id}}>
+        <input type="submit" value="Retoure bestätigen" class="btn btn-reverse" style="font-size: 17px">
+      </div>
+    </form>
+    {{/if}}
+  {{/if}}
 
 
 </section>

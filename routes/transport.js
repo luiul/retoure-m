@@ -128,7 +128,7 @@ router.post('/retoure', (req, res) => {
     let { paket_id } = req.body
 
     // set parameters
-    let values = { transport_status: 'retouniert 📦', fach_status: 'frei 🔓' }
+    let values = { transport_status: 'retouniert 📦', fach_status: 'belegt 🔒' }
     let selector_raw = { where: { paket_id: paket_id }, raw: true }
     let selector = { where: { paket_id: paket_id } }
     let errors = [];
@@ -164,9 +164,10 @@ router.post('/retoure', (req, res) => {
 
 // Search by package id in homepage
 // store variables outside the function scope to pass it to other functions more easily
-var p_id    // int
-var p_bez   // string
-var p_status  // dictionary
+var p_id            // int (185)
+var p_bez           // string (219)
+var pickup_state    // boolean (213 - 215)
+var t_status        // string (219)
 
 router.get('/search', (req, res) => {
     // read and assign request body
@@ -192,32 +193,35 @@ router.get('/search', (req, res) => {
     // query, check for errors and conditions (versuch, alter, transport_status)
     models.Transport.findAll(selector)
         .then(transport => {
+            // check if package exists
             if (transport.length == 0) {
                 errors.push({ text: 'Paket-ID nicht vorhanden' })
             }
+            // check versuch condition
             if (transport.length != 0 && transport[0].versuch > 3) {
                 errors.push({ text: 'Max. Retoureversuche überschritten' })
             }
+            // check alter condition
             if (transport.length != 0 && transport[0].alter > 14) {
                 errors.push({ text: 'Bestellung außerhalb Retourefrist' })
             }
+            // upate confirmation
             if (transport.length != 0 && transport[0].transport_status == 'retouniert 📦') {
                 confirmation = { text: 'Paket erfolgreich retouniert' }
             }
+            // update pickup_state
+            if (transport.length != 0 && transport[0].transport_status == 'abgeholt 📭') {
+                pickup_state = true
+            } else { pickup_state = false }
 
-            // check status of package
-            if (transport.length != 0 && transport[0].transport_status == 'abholbereit 📬') {
-                p_status = { text: 'Retoure beantragen' }
-            }
-            else { p_status = { text: 'Retourefach reservieren' } }
-
-            // store p_bez outside scope
+            // store p_bez and t_status outside scope
             p_bez = transport[0].paket_bez
+            t_status = transport[0].transport_status
 
             // render result
             res.render('transport_id', {
                 confirmation,
-                p_status,
+                pickup_state,
                 errors,
                 transport
             })
@@ -225,25 +229,70 @@ router.get('/search', (req, res) => {
         .catch(err => console.log(err))
 })
 
-// Reserve container / Confirm return wish
-// we pass the stored
+// Make container reservation OR confirm return wish
+// stored values from search query
+// var p_id            // int (185)
+// var p_bez           // string (219)
+// var pickup_state    // boolean (213 - 215)
+// var t_status        // string (219)
 router.get('/reserve', (req, res) => {
     console.log(p_id)
     console.log(p_bez)
-    console.log(p_status)
-    // determine package status
-    var p_status
-    if (p_status[0]) {
-        p_status = { text: 'abholbereit 📬' }
-    } else {
-        p_status = { text: 'abgeholt 📭' }
-    }
+    console.log(pickup_state)
+    console.log(t_status)
+
     res.render('reserve', {
-        p_status,
         p_id,
         p_bez,
-        p_status
+        pickup_state,
+        t_status
     })
 })
+
+router.post('/reserve', (req, res) => {
+    // read and assign request body
+    let { paket_id } = req.body
+
+    // set parameters
+    let values = { transport_status: 'retouniert 📦', fach_status: 'belegt 🔒' }
+    let selector_raw = { where: { paket_id: paket_id }, raw: true }
+    let selector = { where: { paket_id: paket_id } }
+    let errors = [];
+
+    // parse into integer
+    paket_id = parseInt(paket_id)
+
+    // check if input was an integer
+    if (isNaN(paket_id)) {
+        errors.push({ text: 'Bitte Paket-ID im zulässigen Bereich eingeben' })
+        res.render('retoure', { errors })
+    }
+
+    // query, check if record exists and update record
+    models.Transport.findAll(selector_raw)
+        .then(transport => {
+            if (transport.length == 0) {
+                errors.push({ text: 'Paket-ID nicht vorhanden' })
+                res.render('reserve', { errors })
+            } else {
+                models.Transport.update(values, selector)
+                    .then(trans => {
+                        let confirmation = { text: 'Retoure erfolgreich gebucht' }
+                        t_status = 'retouniert 📦'
+                        res.render('reserve', {
+                            confirmation,
+                            p_id,
+                            p_bez,
+                            // pickup_state,
+                            t_status
+                        })
+
+                    })
+
+            }
+        })
+        .catch(err => console.log(err))
+})
+
 
 module.exports = router

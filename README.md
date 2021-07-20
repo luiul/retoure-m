@@ -2,8 +2,8 @@
 
 Updated [🚚 Retouren App](https://github.com/luiul/retoure) with Sequelize migration and seeding to improve reproducibility. Prerequisites to run the app:
 
-- PostgreSQL: install PostgresSQL and create a database. Migrate with Sequelize
-- node.js: install node.js.
+- **PostgreSQL**: install PostgresSQL and create a database.
+- **Node.js**: install node.js.
 
 ## Set up
 
@@ -14,14 +14,14 @@ npm init -y;
 npm install --save sequelize;
 npm install --save pg pg-hstore;
 npm install --save-dev sequelize-cli;
-npx sequelize-cli init;
+npx sequelize-cli init
 ```
 
-Set up the `config.json` file in the `config` folder for Sequelize. Make model, migrate to PostgreSQL by running the following commands in the shell (after updating `scripts` in `package.json`!):
+Set up the `config.json` file in the `config` folder for Sequelize. Add file to `.gitignore`. Make model, migrate to PostgreSQL by running the following commands in the shell (after updating `scripts` in `package.json`):
 
 ```zsh
 npm run make-model;
-npm run migrage;
+npm run migrage
 ```
 
 Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following `create or replace function` statement in the PostgreSQL Query Tool:
@@ -146,7 +146,7 @@ Install other dependencies for the project:
 
 ```zsh
 npm install express dotenv;
-npm install --D nodemon @handlebars/allow-prototype-access express-handlebars handlebars;
+npm install --D nodemon @handlebars/allow-prototype-access express-handlebars handlebars
 ```
 
 Finally, run the following command in the shell:
@@ -215,7 +215,7 @@ Example of an instance of the `Transport` model returned from the database:
 ]
 ```
 
-By passing the parameter `raw = true` to the query, it will return an array with a JSON object instead of a Model instance:
+By passing the parameter `raw = true` to the query, it will return an array with a dictionary instead of a Model instance:
 
 ```javascript
 [
