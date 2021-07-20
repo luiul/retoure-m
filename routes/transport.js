@@ -160,6 +160,49 @@ router.post('/retoure', (req, res) => {
         .catch(err => console.log(err))
 })
 
+
+// Display and book noshow (ZBS)
+router.get('/noshow', (req, res) => res.render('noshow'))
+router.post('/noshow', (req, res) => {
+    // read and assign request body
+    let { paket_id } = req.body
+
+    // set parameters
+    let values = { transport_status: 'abgeholt 📭', fach_status: 'frei 📥' }
+    let selector_raw = { where: { paket_id: paket_id }, raw: true }
+    let selector = { where: { paket_id: paket_id } }
+    let errors = [];
+    let increment = {versuch:1}
+
+    // parse into integer
+    paket_id = parseInt(paket_id)
+
+    // check if input was an integer
+    if (isNaN(paket_id)) {
+        errors.push({ text: 'Bitte Paket-ID im zulässigen Bereich eingeben' })
+        res.render('noshow', { errors })
+    }
+
+    // query, check if record exists and update record
+    models.Transport.findAll(selector_raw)
+        .then(transport => {
+            if (transport.length == 0) {
+                errors.push({ text: 'Paket-ID nicht vorhanden' })
+                res.render('noshow', { errors })
+            } else {
+                models.Transport.increment(increment, selector)
+                models.Transport.update(values, selector)
+                    .then(trans => {
+                        let confirmation = { text: 'No-Show erfolgreich gebucht' }
+                        res.render('noshow', { confirmation })
+
+                    })
+
+            }
+        })
+        .catch(err => console.log(err))
+})
+
 // Search by package id in homepage
 // store variables outside the function scope to pass it to other functions more easily
 var p_id            // int (185)
@@ -229,8 +272,6 @@ router.get('/search', (req, res) => {
             emp_plz = transport[0].emp_plz
             abd_name = transport[0].abd_name
             abd_plz = transport[0].abd_plz
-
-            console.log(transport)
 
             // render result
             res.render('transport_id', {

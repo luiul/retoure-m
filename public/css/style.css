@@ -72,7 +72,7 @@ header {
 }
 
 header nav ul {
-  display: flex;
+  display:flex
 }
 
 header nav li {
