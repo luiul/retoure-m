@@ -131,14 +131,50 @@ for each row
 execute procedure return_task()
 ```
 
+```sql
+create or replace function reserve_task()
+returns trigger as
+$$
+begin
+ if new.transport_status = 'Retoure begonnen 🚚' then
+  new.fach_status:='reserviert 🔐';
+ end if;
+return new;
+end
+$$
+language plpgsql
+```
+
+```sql
+create trigger reserve_task
+before update on "Transports"
+for each row
+execute procedure reserve_task()
+```
+
 The table for the project would be equivalent to the following PostgreSQL view:
 
 ```sql
-create view "Transports" as
+create or replace view "Transports" as
 select id, tranport_status, paket_id, paket_bez, fach_bez, fach_status, zbs_bez, tour_bez, tour, tour_zeit, emp_name, abd_name, abd_plz, versuch, "alter", "createdAt", "updatedAt"
 from tour, zbs, fach, paket, paket_transport, emp, abd, ort
 where tour.tour_id = zbs.tour_id, zbs.fach_id = fach.fach_id, zbs.paket_id = paket.paket_id, paket.paket_id = paket_transport.paket_id, fach.fach_id = paket_transport.fach_id, paket_transport.emp_id = emp.emp_id, paket_transport.abd_id = abd.abd_id, emp.plz = ort.plz, abd.plz = ort.plz
 ```
+
+The two most important tables as views are:
+
+```sql
+create or replace view auftrag as
+select id, transport_status, paket_id, paket_bez, emp_name, emp_plz, abd_name ,abd_plz, versuch , "alter"
+from "Transports"
+```
+
+```sql
+create view fach as
+select id, fach_bez, fach_status, zbs_bez, tour_bez, tour, tour_zeit
+from "Transports"
+```
+
 
 Note that to simplify the data model and model objects of our project we opted out of using multiple tables in the database, creating this view and working with it.
 

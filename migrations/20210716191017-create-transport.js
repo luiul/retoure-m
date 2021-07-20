@@ -24,7 +24,7 @@ module.exports = {
       },
       fach_status: {
         type: Sequelize.STRING,
-        defaultValue:'belegt 🔐'
+        defaultValue:'belegt 🔒'
       },
       zbs_bez: {
         type: Sequelize.STRING

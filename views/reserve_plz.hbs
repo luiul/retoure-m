@@ -5,7 +5,7 @@
     <p>{{confirmation.text}}</p>
   </div>
   {{else}}
-  <h3>📦 Das folgende Paket wird retuoniert</h3>
+  <h3>📦 Das folgende Paket wird retourniert</h3>
   {{/if}}
 
   <div class="transport">
@@ -30,6 +30,9 @@
         rückgängig gemacht werden.</span></li>
     </ul>
   </div>
+
+  {{#if confirmation}}
+  {{else}}
 
   {{#each errors}}
   <div class="error">
@@ -66,6 +69,15 @@
           </tr>
         </table>
       </ul>
+      <form action="/transport/reserve_plz" method="POST">
+      <div class="input-group" style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+        {{!-- Change to hidden later!!! --}}
+        <input type="text" name="id" id="id" value={{id}}>
+        <input type="submit" value="Retourefach reservieren" class="btn btn-reverse" style="font-size: 17px">
+      </div>
+    </form>
+
+
     </div>
     {{else}}
     <p>❌ Keine freien Fächer in Abgabe-PLZ {{plz}}</p>
@@ -79,6 +91,8 @@
     <input type="search" name="plz" placeholder="PLZ eingeben ...">
     <input type="submit" value="Suche" />
   </form>
+
+  {{/if}}
 
 
 
