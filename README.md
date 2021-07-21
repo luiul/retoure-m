@@ -1,6 +1,6 @@
 # 🚚 Retouren App with Sequelize Migration
 
-Updated [🚚 Retouren App](https://github.com/luiul/retoure) with Sequelize migration and seeding to improve reproducibility. Prerequisites to run the app:
+Upgraded [🚚 Retouren App](https://github.com/luiul/retoure) with Sequelize migration and seeding to improve reproducibility. Prerequisites to run the app:
 
 - **PostgreSQL**: install PostgresSQL and create a database.
 - **Node.js**: install node.js.
