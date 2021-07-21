@@ -40,48 +40,50 @@
   </div>
   {{else}}
   {{!-- No errors --}}
-    <h3>
-      📥 Freie Fächer in Abgabe-PLZ {{plz}}
-    </h3>
-    {{#each options}}
-    <div class="transport">
-      <ul>
-        <table>
-          <tr>
-            <th>Fach</th>
-            <td>{{fach_bez}}</td>
-          </tr>
-          <tr>
-            <th>Fachstatus</th>
-            <td>{{fach_status}}</td>
-          </tr>
-          <tr>
-            <th>ZBS</th>
-            <td>{{zbs_bez}}</td>
-          </tr>
-          <tr>
-            <th>Tour</th>
-            <td>{{tour_bez}}</td>
-          </tr>
-          <tr>
-            <th>Zeitfenster</th>
-            <td>{{tour_zeit}}</td>
-          </tr>
-        </table>
-      </ul>
-      <form action="/transport/reserve_plz" method="POST">
+  {{#each t_options}}
+  <h3>
+    📥 Freie Fächer in Abgabe-PLZ {{plz}}
+  </h3>
+  <div class="transport">
+    <ul>
+      <table>
+        <tr>
+          <th>Fach</th>
+          <td>{{fach_bez}}</td>
+        </tr>
+        <tr>
+          <th>Fachstatus</th>
+          <td>{{fach_status}}</td>
+        </tr>
+        <tr>
+          <th>ZBS</th>
+          <td>{{zbs_bez}}</td>
+        </tr>
+        <tr>
+          <th>Tour</th>
+          <td>{{tour_bez}}</td>
+        </tr>
+        <tr>
+          <th>Zeitfenster</th>
+          <td>{{tour_zeit}}</td>
+        </tr>
+      </table>
+    </ul>
+    <form action="/transport/reserve_plz" method="POST">
       <div class="input-group" style="display:flex; justify-content:flex-end; width:100%; padding:0;">
         {{!-- Change to hidden later!!! --}}
-        <input type="text" name="id" id="id" value={{id}}>
+        <input type="hidden" name="id" id="id" value={{id}}>
         <input type="submit" value="Retourefach reservieren" class="btn btn-reverse" style="font-size: 17px">
       </div>
     </form>
 
 
-    </div>
-    {{else}}
-    <p>❌ Keine freien Fächer in Abgabe-PLZ {{plz}}</p>
-    {{/each}}
+  </div>
+  {{else}}
+  <h3>
+  ❌ Keine freien Fächer in Abgabe-PLZ {{plz}}
+  </h3>
+  {{/each}}
 
   {{/each}}
   <h2>

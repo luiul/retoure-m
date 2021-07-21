@@ -344,6 +344,7 @@ router.post('/reserve', (req, res) => {
 var options = []
 router.get('/reserve/search', (req, res) => {
     // read and assign request body
+    let t_options = []
     let { plz } = req.query
 
     // set parameters relevant in the scope
@@ -372,13 +373,15 @@ router.get('/reserve/search', (req, res) => {
             t_status
         })
     }
+
     models.Transport.findAll(selector)
         .then(transport => {
+            // console.log(transport)
             // populate options array
             for (let i = 0; i < transport.length; i++) {
                 for (let j = 0; j < transport[i].tour.length; j++) {
                     if (transport[i].tour[j] == plz) {
-                        options.push({
+                        t_options.push({
                             id: transport[i].id,
                             fach_bez: transport[i].fach_bez,
                             fach_status: transport[i].fach_status,
@@ -389,9 +392,10 @@ router.get('/reserve/search', (req, res) => {
                     }
                 }
             }
+            options = t_options
             res.render('reserve_plz', {
                 plz,
-                options,
+                t_options,
                 p_id,
                 p_bez,
                 t_status
@@ -415,7 +419,8 @@ router.post('/reserve_plz', (req, res) => {
     }
 
     // set parameters
-    let values = { transport_status: 'Retoure begonnen 🚚', fach_status: 'reserviert 🔐', fach_bez, zbs_bez, tour_bez}
+    // transport_status: 'Retoure begonnen 🚚',
+    let values = { fach_status: 'reserviert 🔐', fach_bez, zbs_bez, tour_bez}
     // ad the user data!
     let selector_raw = { where: { paket_id : p_id }, raw: true }
     let selector = { where: { paket_id: p_id } }

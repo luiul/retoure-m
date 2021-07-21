@@ -170,11 +170,16 @@ from "Transports"
 ```
 
 ```sql
-create view fach as
+create or replace view fach as
 select id, fach_bez, fach_status, zbs_bez, tour_bez, tour, tour_zeit
 from "Transports"
 ```
 
+```sql
+create view auftrag_fach as
+select *
+from "Transports"
+```
 
 Note that to simplify the data model and model objects of our project we opted out of using multiple tables in the database, creating this view and working with it.
 
