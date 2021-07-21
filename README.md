@@ -161,7 +161,7 @@ from tour, zbs, fach, paket, paket_transport, emp, abd, ort
 where tour.tour_id = zbs.tour_id, zbs.fach_id = fach.fach_id, zbs.paket_id = paket.paket_id, paket.paket_id = paket_transport.paket_id, fach.fach_id = paket_transport.fach_id, paket_transport.emp_id = emp.emp_id, paket_transport.abd_id = abd.abd_id, emp.plz = ort.plz, abd.plz = ort.plz
 ```
 
-The two most important tables as views are:
+The most important tables as views are:
 
 ```sql
 create or replace view auftrag as

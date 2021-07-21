@@ -419,8 +419,7 @@ router.post('/reserve_plz', (req, res) => {
     }
 
     // set parameters
-    // transport_status: 'Retoure begonnen 🚚',
-    let values = { fach_status: 'reserviert 🔐', fach_bez, zbs_bez, tour_bez}
+    let values = { transport_status: 'Retoure begonnen 🚚', fach_status: 'reserviert 🔐', fach_bez, zbs_bez, tour_bez}
     // ad the user data!
     let selector_raw = { where: { paket_id : p_id }, raw: true }
     let selector = { where: { paket_id: p_id } }
