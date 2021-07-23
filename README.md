@@ -5,7 +5,7 @@ Upgraded [🚚 Retouren App](https://github.com/luiul/retoure) with Sequelize mi
 - **PostgreSQL**: install PostgresSQL and create a database.
 - **Node.js**: install node.js.
 
-Unlisted Youtube [🚚 Retoure App Demo](https://youtu.be/yIhD226f2Mk).
+Unlisted Youtube video: [🚚 Retoure App Demo](https://youtu.be/yIhD226f2Mk).
 
 ## Set up
 
