@@ -1,79 +1,105 @@
 <section id="transport" class="container">
     <h1>🔎 Suchergebnis</h1>
     {{#if fach}}
-        {{#each transport}}
-        <div class="transport">
-            <ul>
-                <table>
-                    <tr>
-                        <th>Paketstatus</th>
-                        <td>{{transport_status}}</td>
-                    </tr>
-                    <tr>
-                        <th>Paket-ID</th>
-                        <td>{{paket_id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Paket</th>
-                        <td>{{paket_bez}}</td>
-                    </tr>
-                    <tr>
-                        <th>Retoureversuche</th>
-                        <td>{{versuch}}</td>
-                    </tr>
-                    <tr>
-                        <th>Tage nach Bestellung</th>
-                        <td>{{alter}}</td>
-                    </tr>
-                    <tr>
-                        <th>Fach</th>
-                        <td>{{fach_bez}}</td>
-                    </tr>
-                    <tr>
-                        <th>Fachstatus</th>
-                        <td>{{fach_status}}</td>
-                    </tr>
-                </table>
-                <span>* Es gibt max. 3 Abhol- und Retoureversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe
-                    von Gründen rückgängig gemacht werden.</span></li>
-            </ul>
-        </div>
-        {{else}}
-        <p>Keine Daten verfügbar.</p>
-        {{/each}}
+    {{#each transport}}
+    <div class="transport">
+        <ul>
+            <table>
+                <tr>
+                    <th>Paketstatus</th>
+                    <td>{{transport_status}}</td>
+                </tr>
+                <tr>
+                    <th>Paket-ID</th>
+                    <td>{{paket_id}}</td>
+                </tr>
+                <tr>
+                    <th>Paket</th>
+                    <td>{{paket_bez}}</td>
+                </tr>
+                <tr>
+                    <th>Retoureversuche</th>
+                    <td>{{versuch}}</td>
+                </tr>
+                <tr>
+                    <th>Tage nach Bestellung</th>
+                    <td>{{alter}}</td>
+                </tr>
+                <tr>
+                    <th>Fach</th>
+                    <td>{{fach_bez}}</td>
+                </tr>
+                <tr>
+                    <th>Fachstatus</th>
+                    <td>{{fach_status}}</td>
+                </tr>
+                <tr>
+                    <th>ZBS</th>
+                    <td>{{zbs_bez}}</td>
+                </tr>
+                <tr>
+                    <th>Tour</th>
+                    <td>{{tour_bez}}</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <th>Tourstopps</th>
+                    <th>{{tour.[0]}}</th>
+                    <th>{{tour.[1]}}</th>
+                    <th>{{tour.[2]}}</th>
+                    <th>{{tour.[3]}}</th>
+                </tr>
+                <tr>
+                    <td>Zeitfenster</td>
+                    <td>{{tour_zeit.[0]}}</td>
+                    <td>{{tour_zeit.[1]}}</td>
+                    <td>{{tour_zeit.[2]}}</td>
+                    <td>{{tour_zeit.[3]}}</td>
+                </tr>
+            </table>
+
+            <span>* Es gibt max. 3 Abhol- und Retoureversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe
+                von Gründen rückgängig gemacht werden.</span></li>
+        </ul>
+    </div>
     {{else}}
-        {{#each transport}}
-        <div class="transport">
-            <ul>
-                <table>
-                    <tr>
-                        <th>Paketstatus</th>
-                        <td>{{transport_status}}</td>
-                    </tr>
-                    <tr>
-                        <th>Paket-ID</th>
-                        <td>{{paket_id}}</td>
-                    </tr>
-                    <tr>
-                        <th>Paket</th>
-                        <td>{{paket_bez}}</td>
-                    </tr>
-                    <tr>
-                        <th>Retoureversuche</th>
-                        <td>{{versuch}}</td>
-                    </tr>
-                    <tr>
-                        <th>Tage nach Bestellung</th>
-                        <td>{{alter}}</td>
-                    </tr>
-                </table>
-                <span>* Es gibt max. 3 Abhol- und Retoureversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe
-                    von Gründen rückgängig gemacht werden.</span></li>
-            </ul>
-        </div>
-        {{else}}
-        <p>Keine Daten verfügbar.</p>
-        {{/each}}
+    <p>Keine Daten verfügbar.</p>
+    {{/each}}
+    {{else}}
+    {{#each transport}}
+    <div class="transport">
+        <ul>
+            <table>
+                <tr>
+                    <th>Paketstatus</th>
+                    <td>{{transport_status}}</td>
+                </tr>
+                <tr>
+                    <th>Paket-ID</th>
+                    <td>{{paket_id}}</td>
+                </tr>
+                <tr>
+                    <th>Paket</th>
+                    <td>{{paket_bez}}</td>
+                </tr>
+                <tr>
+                    <th>Retoureversuche</th>
+                    <td>{{versuch}}</td>
+                </tr>
+                <tr>
+                    <th>Tage nach Bestellung</th>
+                    <td>{{alter}}</td>
+                </tr>
+            </table>
+            <span>* Es gibt max. 3 Abhol- und Retoureversuche. Bestellungen können innerhalb von 14 Tagen ohne Angabe
+                von Gründen rückgängig gemacht werden.</span></li>
+        </ul>
+    </div>
+    {{else}}
+    <p>Keine Daten verfügbar.</p>
+    {{/each}}
     {{/if}}
 
     {{#each errors}}
@@ -86,9 +112,15 @@
         <p>{{confirmation.text}}</p>
     </div>
     {{else}}
+    {{#if pickup_state}}
     <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
         <a href="/transport/reserve" class="btn btn-reverse">Retoure beantragen</a>
     </div>
+    {{else}}
+    <div style="display:flex; justify-content:flex-end; width:100%; padding:0;">
+        <a href="/transport/reserve" class="btn btn-reverse">Retourefach reservieren</a>
+    </div>
+    {{/if}}
     {{/if}}
     {{/each}}
 </section>

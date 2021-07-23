@@ -40,10 +40,12 @@
   </div>
   {{else}}
   {{!-- No errors --}}
-  {{#each t_options}}
+  {{#if t_options}}
   <h3>
     📥 Freie Fächer in Abgabe-PLZ {{plz}}
   </h3>
+  {{/if}}
+  {{#each t_options}}
   <div class="transport">
     <ul>
       <table>
@@ -95,7 +97,5 @@
   </form>
 
   {{/if}}
-
-
 
 </section>

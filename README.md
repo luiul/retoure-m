@@ -17,14 +17,14 @@ npm install --save-dev sequelize-cli;
 npx sequelize-cli init
 ```
 
-Set up the `config.json` file in the `config` folder for Sequelize. Add file to `.gitignore`. Make model, migrate to PostgreSQL by running the following commands in the shell (after updating `scripts` in `package.json`):
+Set up the `config.json` file in the `config` folder with credentials for Sequelize. Add file to `.gitignore`. Make model and migrate to PostgreSQL by running the following commands in the shell (after updating `scripts` in `package.json`):
 
 ```zsh
 npm run make-model;
-npm run migrage
+npm run migrate
 ```
 
-Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following `create or replace function` statement in the PostgreSQL Query Tool:
+Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following `create or replace function` statement in the PostgreSQL Query Tool or psql:
 
 ```sql
 create or replace function add_tour()
@@ -44,7 +44,7 @@ $$
 language plpgsql
 ```
 
-Make PostgreSQL trigger by running the following `create trigger` statement in the Query Tool:
+Make PostgreSQL trigger by running the following `create trigger` statement in the Query Tool or psql:
 
 ```sql
 create trigger add_tour_i
@@ -66,7 +66,7 @@ Run seed and populate the database by running the following command in the shell
 npm run seed
 ```
 
-After populating the database add the pickup, add, and return triggers with the following `create or replace function` and `create trigger` statements in PostgreSQL:
+After populating the database add the pickup, add, and return triggers with the following `create or replace function` and `create trigger` statements in PostgreSQL or psql:
 
 ```sql
 create or replace function pickup_task()
@@ -152,7 +152,7 @@ for each row
 execute procedure reserve_task()
 ```
 
-The table for the project would be equivalent to the following PostgreSQL view:
+The model table for the project would be equivalent to the following PostgreSQL view:
 
 ```sql
 create or replace view "Transports" as
@@ -161,7 +161,7 @@ from tour, zbs, fach, paket, paket_transport, emp, abd, ort
 where tour.tour_id = zbs.tour_id, zbs.fach_id = fach.fach_id, zbs.paket_id = paket.paket_id, paket.paket_id = paket_transport.paket_id, fach.fach_id = paket_transport.fach_id, paket_transport.emp_id = emp.emp_id, paket_transport.abd_id = abd.abd_id, emp.plz = ort.plz, abd.plz = ort.plz
 ```
 
-The most important tables as views are:
+The most important tables for the project as views are:
 
 ```sql
 create or replace view auftrag as
@@ -190,7 +190,7 @@ npm install express dotenv;
 npm install --D nodemon @handlebars/allow-prototype-access express-handlebars handlebars
 ```
 
-Finally, run the following command in the shell:
+Finally, run the following command in the shell to start the server and open localhost:5000 in the browser:
 
 ```zsh
 npm run dev
@@ -256,7 +256,7 @@ Example of an instance of the `Transport` model returned from the database:
 ]
 ```
 
-By passing the parameter `raw = true` to the query, it will return an array with a dictionary instead of a Model instance:
+By passing the parameter `raw = true` to the query, it will return an array with a dictionary instead of a Model instance and its metadata:
 
 ```javascript
 [
