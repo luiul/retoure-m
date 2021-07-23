@@ -207,7 +207,7 @@ router.post('/noshow', (req, res) => {
 // store variables outside the function scope to pass it to other functions more easily
 var p_id            // int (185)
 var p_bez           // string (220)
-var pickup_state    // boolean (213 - 215)
+var p_state    // boolean (213 - 215)
 var t_status        // string (221)
 var emp_name        // string (222)
 var emp_plz         // string (223)
@@ -223,6 +223,7 @@ router.get('/search', (req, res) => {
     let errors = [];
     let confirmation;
     var fach = true
+    let pick_up_state = false
 
     // parse paket_id into integer
     paket_id = parseInt(paket_id)
@@ -257,8 +258,8 @@ router.get('/search', (req, res) => {
             }
             // update pickup_state
             if (transport.length != 0 && transport[0].transport_status == 'abgeholt 📭') {
-                pickup_state = true
-            } else { pickup_state = false }
+                pick_up_state = true
+            }
 
             // show container / fach
             if(transport.length != 0 && (transport[0].transport_status == 'abgeholt 📭' || transport[0].transport_status == 'retouniert 📦')) {
@@ -272,11 +273,12 @@ router.get('/search', (req, res) => {
             emp_plz = transport[0].emp_plz
             abd_name = transport[0].abd_name
             abd_plz = transport[0].abd_plz
+            p_state = pick_up_state
 
             // render result
             res.render('transport_id', {
                 confirmation,
-                pickup_state,
+                pick_up_state,
                 errors,
                 transport,
                 fach
@@ -290,7 +292,7 @@ router.get('/reserve', (req, res) => {
     res.render('reserve', {
         p_id,
         p_bez,
-        pickup_state,
+        p_state,
         t_status
     })
 })
