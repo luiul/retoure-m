@@ -258,7 +258,7 @@ Example of an instance of the `Transport` model returned from the database:
 ]
 ```
 
-By passing the parameter `raw = true` to the query, it will return an array with a dictionary instead of a Model instance and its metadata:
+Passing the `raw = true` parameter to the query will return an array containing a JSON instead of a model instance and its metadata: 
 
 ```javascript
 [
