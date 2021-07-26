@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const Sequelize = require('sequelize')
 const models = require('../models/index');
 
 // Might not be required in the final version
-const db = require('../config/database');
-const { truncate } = require('../config/database');
-const Op = Sequelize.Op
+// const Sequelize = require('sequelize')
+// const db = require('../config/database');
+// const { truncate } = require('../config/database');
+// const Op = Sequelize.Op
 
 // Testing transport page for the first time
 // router.get('/',(req,res)=>{
@@ -209,10 +209,10 @@ var p_id            // int (185)
 var p_bez           // string (220)
 var p_state    // boolean (213 - 215)
 var t_status        // string (221)
-var emp_name        // string (222)
-var emp_plz         // string (223)
-var abd_name        // string (224)
-var abd_plz         // string (225)
+// var emp_name        // string (222)
+// var emp_plz         // string (223)
+// var abd_name        // string (224)
+// var abd_plz         // string (225)
 
 router.get('/search', (req, res) => {
     // read and assign request body
@@ -269,10 +269,10 @@ router.get('/search', (req, res) => {
             // store p_bez and t_status outside scope
             p_bez = transport[0].paket_bez
             t_status = transport[0].transport_status
-            emp_name = transport[0].emp_name
-            emp_plz = transport[0].emp_plz
-            abd_name = transport[0].abd_name
-            abd_plz = transport[0].abd_plz
+            // emp_name = transport[0].emp_name
+            // emp_plz = transport[0].emp_plz
+            // abd_name = transport[0].abd_name
+            // abd_plz = transport[0].abd_plz
             p_state = pick_up_state
 
             // render result

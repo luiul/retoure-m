@@ -26,7 +26,7 @@ npm run make-model;
 npm run migrate
 ```
 
-Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following `create or replace function` statement in the PostgreSQL Query Tool or psql:
+Make PostgreSQL trigger function to populate `tour` and `tour_zeit` by running the following `create or replace function` statement in the pgAdmin Query Tool or psql:
 
 ```sql
 create or replace function add_tour()
@@ -68,7 +68,7 @@ Run seed and populate the database by running the following command in the shell
 npm run seed
 ```
 
-After populating the database add the pickup, add, and return triggers with the following `create or replace function` and `create trigger` statements in PostgreSQL or psql:
+After populating the database add the pickup, add, and return triggers with the following `create or replace function` and `create trigger` statements in pgAdmin or psql:
 
 ```sql
 create or replace function pickup_task()
@@ -258,7 +258,7 @@ Example of an instance of the `Transport` model returned from the database:
 ]
 ```
 
-Passing the `raw = true` parameter to the query will return an array containing a JSON instead of a model instance and its metadata: 
+Passing the `raw = true` parameter to the query will return an array containing a JSON instead of a model instance and its metadata:
 
 ```javascript
 [
