@@ -7,6 +7,10 @@ Upgraded [🚚 Retouren App](https://github.com/luiul/retoure) with Sequelize mi
 
 Unlisted Youtube video: [🚚 Retoure App Demo](https://youtu.be/yIhD226f2Mk).
 
+## App Architecture
+
+<img src="figures/restful-api.png" width="800" alt="Restful API App Architecture" class="center">
+
 ## Set up
 
 Run the following commands in the shell to set up the project. Start by setting up node.js and Sequelize to migrate and seed the schema and data:
